@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<!-- Ask Shehryar — AI profile assistant -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ask Shehryar's AI — Data Analytics & Strategy Professional</title>
+<meta name="description" content="Chat with Shehryar Hassan's AI assistant. Ask about his 6 years of experience in data analytics, strategy consulting, and AI-driven solutions for SiriusXM, AMEX, and Nestlé.">
+<style>
+  :root{
+    --blue:#0A66C2; --blue-dark:#084d92; --blue-light:#EAF3FB;
+    --ink:#1d2226; --ink-soft:#56687a; --line:#e2e8ef;
+    --bg:#f3f6f9; --card:#ffffff; --radius:14px;
+    --shadow:0 1px 2px rgba(9,30,66,.08), 0 8px 24px rgba(9,30,66,.08);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:linear-gradient(160deg,#eef3f8 0%,#f6f8fa 45%,#e8eff6 100%);
+    color:var(--ink); display:flex; flex-direction:column; align-items:center;
+    min-height:100dvh; padding:20px 14px 28px;
+  }
+  .wrap{width:100%; max-width:760px; display:flex; flex-direction:column; gap:14px; flex:1;}
+
+  /* ---------- Profile header ---------- */
+  .profile{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:22px 24px; display:flex; gap:18px; align-items:center; flex-wrap:wrap;
+  }
+  .avatar{
+    width:64px; height:64px; border-radius:50%; flex:0 0 64px;
+    background:linear-gradient(135deg,var(--blue),#3b8dd9);
+    color:#fff; font-size:24px; font-weight:700; display:flex; align-items:center; justify-content:center;
+    letter-spacing:.5px; box-shadow:0 3px 10px rgba(10,102,194,.35);
+  }
+  .p-info{flex:1; min-width:220px;}
+  .p-info h1{font-size:20px; font-weight:700;}
+  .p-info .tagline{font-size:13.5px; color:var(--ink-soft); margin-top:3px; line-height:1.45;}
+  .p-info .loc{font-size:12.5px; color:var(--ink-soft); margin-top:5px; display:flex; align-items:center; gap:5px;}
+  .p-actions{display:flex; gap:9px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:7px; text-decoration:none; cursor:pointer;
+    font-size:13.5px; font-weight:600; padding:9px 16px; border-radius:24px; border:1.5px solid var(--blue);
+    transition:all .15s ease; line-height:1;
+  }
+  .btn-primary{background:var(--blue); color:#fff;}
+  .btn-primary:hover{background:var(--blue-dark); border-color:var(--blue-dark);}
+  .btn-ghost{background:transparent; color:var(--blue);}
+  .btn-ghost:hover{background:var(--blue-light);}
+  .btn svg{width:15px; height:15px; fill:currentColor;}
+
+  /* ---------- Chat card ---------- */
+  .chat{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); display:flex; flex-direction:column; flex:1; min-height:460px; overflow:hidden;
+  }
+  .chat-head{
+    padding:13px 20px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:10px;
+    background:#fbfcfe;
+  }
+  .dot{width:9px; height:9px; border-radius:50%; background:#31a24c; box-shadow:0 0 0 3px rgba(49,162,76,.18);}
+  .chat-head .t{font-size:14px; font-weight:600;}
+  .chat-head .s{font-size:12px; color:var(--ink-soft); margin-left:auto;}
+  .msgs{flex:1; overflow-y:auto; padding:20px; display:flex; flex-direction:column; gap:14px; scroll-behavior:smooth;}
+  .msg{display:flex; gap:10px; max-width:88%; animation:pop .25s ease;}
+  @keyframes pop{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+  .msg.bot{align-self:flex-start;}
+  .msg.user{align-self:flex-end; flex-direction:row-reverse;}
+  .m-avatar{
+    width:30px; height:30px; border-radius:50%; flex:0 0 30px; font-size:11px; font-weight:700;
+    display:flex; align-items:center; justify-content:center; margin-top:2px;
+  }
+  .msg.bot .m-avatar{background:linear-gradient(135deg,var(--blue),#3b8dd9); color:#fff;}
+  .msg.user .m-avatar{background:#dfe6ee; color:var(--ink-soft);}
+  .bubble{
+    padding:11px 15px; border-radius:14px; font-size:14px; line-height:1.55; white-space:pre-line;
+  }
+  .msg.bot .bubble{background:#f1f5f9; border:1px solid var(--line); border-top-left-radius:4px;}
+  .msg.user .bubble{background:var(--blue); color:#fff; border-top-right-radius:4px;}
+  .bubble b{color:inherit;}
+  .bubble a{color:var(--blue); font-weight:600; text-decoration:none;}
+  .bubble a:hover{text-decoration:underline;}
+  .contact-row{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;}
+  .contact-row .btn{font-size:12.5px; padding:8px 14px;}
+  .bubble a.btn-primary{color:#fff;}
+  .bubble a.btn-primary:hover{color:#fff;}
+
+  /* typing indicator */
+  .typing .bubble{display:flex; gap:5px; align-items:center; padding:14px 16px;}
+  .typing .d{width:7px; height:7px; border-radius:50%; background:#9fb2c4; animation:blink 1.2s infinite;}
+  .typing .d:nth-child(2){animation-delay:.18s;} .typing .d:nth-child(3){animation-delay:.36s;}
+  @keyframes blink{0%,80%,100%{opacity:.25; transform:translateY(0);} 40%{opacity:1; transform:translateY(-3px);}}
+
+  /* chips */
+  .chips{display:flex; gap:8px; flex-wrap:wrap; padding:0 20px 6px;}
+  .chip{
+    font-size:12.5px; font-weight:600; color:var(--blue); background:var(--blue-light);
+    border:1px solid #c7dff3; border-radius:20px; padding:7px 13px; cursor:pointer; transition:all .15s;
+  }
+  .chip:hover{background:#d9eafa; border-color:var(--blue);}
+
+  /* input */
+  .inputbar{display:flex; gap:10px; padding:14px 16px; border-top:1px solid var(--line); background:#fbfcfe;}
+  .inputbar input{
+    flex:1; border:1.5px solid var(--line); border-radius:24px; padding:11px 18px; font-size:14px;
+    outline:none; transition:border .15s; background:#fff; color:var(--ink);
+  }
+  .inputbar input:focus{border-color:var(--blue);}
+  .send{
+    width:42px; height:42px; border-radius:50%; border:none; background:var(--blue); color:#fff;
+    cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s; flex:0 0 42px;
+  }
+  .send:hover{background:var(--blue-dark);}
+  .send svg{width:17px; height:17px; fill:#fff; margin-left:2px;}
+
+  .foot{font-size:11.5px; color:var(--ink-soft); text-align:center; line-height:1.5;}
+  .foot a{color:var(--blue); text-decoration:none; font-weight:600;}
+
+  @media(max-width:560px){
+    body{padding:10px 8px 18px;}
+    .profile{padding:16px; gap:12px;}
+    .p-actions{width:100%;}
+    .p-actions .btn{flex:1; justify-content:center;}
+    .msg{max-width:94%;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="profile">
+    <div class="avatar">SH</div>
+    <div class="p-info">
+      <h1>Shehryar Hassan</h1>
+      <div class="tagline">Data Analytics &amp; Strategy · World Bank Group · 6 yrs international experience (SiriusXM, AMEX, Nestlé)</div>
+      <div class="loc">📍 Vienna, Austria</div>
+    </div>
+    <div class="p-actions">
+      <a class="btn btn-primary" href="mailto:shehrhass@gmail.com?subject=Opportunity%20—%20via%20your%20AI%20assistant">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>Email
+      </a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/shehrhassan/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>LinkedIn
+      </a>
+      <!-- Optional: upload resume.pdf to the same repo, then remove the comment markers below -->
+      <!-- <a class="btn btn-ghost" href="resume.pdf" target="_blank">Resume</a> -->
+    </div>
+  </div>
+
+  <div class="chat">
+    <div class="chat-head">
+      <div class="dot"></div>
+      <div class="t">Shehryar's AI Assistant</div>
+      <div class="s">answers instantly</div>
+    </div>
+    <div class="msgs" id="msgs"></div>
+    <div class="chips" id="chips"></div>
+    <div class="inputbar">
+      <input id="input" type="text" placeholder="Ask about Shehryar's experience, skills, availability…" autocomplete="off" maxlength="300">
+      <button class="send" id="send" aria-label="Send">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21 23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="foot">
+    AI assistant trained on Shehryar Hassan's professional profile · For anything it can't answer, reach him at
+    <a href="mailto:shehrhass@gmail.com">shehrhass@gmail.com</a> or on <a href="https://www.linkedin.com/in/shehrhassan/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</div>
+
+<script>
+// === BOT LOGIC START ===
+var CONTACT_HTML = '<span class="contact-row">'
+  + '<a class="btn btn-primary" href="mailto:shehrhass@gmail.com?subject=Opportunity%20—%20via%20your%20AI%20assistant">Email Shehryar</a>'
+  + '<a class="btn btn-ghost" href="https://www.linkedin.com/in/shehrhassan/" target="_blank" rel="noopener">Message on LinkedIn</a></span>';
+
+var INTENTS = [
+  {
+    id:'greeting',
+    keywords:{hi:3,hello:3,hey:3,greetings:3,morning:1,afternoon:1,evening:1,howdy:3},
+    answer:"Hello! 👋 I'm Shehryar's AI assistant. I can tell you about his experience, skills, education, biggest achievements, and how to get in touch. What would you like to know?",
+    followups:['Give me a quick overview','What are his biggest achievements?','What is he doing now?']
+  },
+  {
+    id:'about',
+    keywords:{about:2,overview:3,summary:3,who:2,introduce:3,introduction:3,profile:2,background:2,yourself:2,himself:2,'tell':1,shehryar:1,elevator:3,pitch:2},
+    answer:"<b>Shehryar Hassan</b> is a data analytics and strategy professional with <b>6 years of international experience</b> across EMEA.\n\nHe has delivered AI-driven solutions for <b>SiriusXM, American Express, and Nestlé</b>, and led multi-million-dollar projects in telecom, retail, education, and healthcare — working at the intersection of <b>pricing, data, and operations</b>.\n\nHe's currently with the <b>World Bank Group</b> in Vienna and pursuing a Master's in Economics, Data & Policy at Central European University (Data Science specialization, on scholarship).",
+    followups:['Walk me through his career','What are his technical skills?','What is he doing now?']
+  },
+  {
+    id:'current',
+    keywords:{now:2,currently:3,current:3,today:2,'world':3,bank:3,doing:1,latest:2,recent:2,present:2},
+    phrases:[{text:'world bank',boost:4},{text:'right now',boost:3}],
+    answer:"Shehryar is currently at the <b>World Bank Group</b> in Vienna (since May 2026), selected for the flagship <b>World Bank Pioneer program</b>. He:\n\n• Develops and analyzes economic policy options for water development projects in Eastern & Central Europe\n• Drives data analytics for the project within the IECUR unit\n• Mobilizes private and public sector stakeholders for project delivery\n\nIn parallel, he's completing a <b>Master's in Economics, Data & Policy</b> at Central European University (graduating May 2027).\n\n<b>About the World Bank Group:</b> a Washington D.C.–headquartered international financial institution — <b>189 member countries</b>, staff from 170+ nations, offices in 130+ locations. Its five institutions (IBRD, IDA, IFC, MIGA, ICSID) provide financing, policy advice, and technical assistance to developing countries.",
+    followups:['What did he do before?','Is he open to new opportunities?','What are his technical skills?']
+  },
+  {
+    id:'experience',
+    keywords:{experience:3,career:3,history:2,journey:2,worked:2,work:1,roles:2,role:1,jobs:2,job:1,employment:3,'walk':1,through:1,companies:2,cv:2,resume:2,timeline:2,past:1},
+    answer:"Here's Shehryar's career at a glance (6 years, 4 countries):\n\n• <b>World Bank Group</b> (2026–now, Vienna) — Pioneer program; economic policy & data analytics for water projects in Europe\n• <b>Laluz GmbH</b> (2025–26, Vienna) — Reporting & Controls; digitalized finance and supply chain ops\n• <b>Afiniti</b> (2024–25) — Senior Data Analyst; AI optimization for AMEX & SiriusXM\n• <b>Creare Consulting</b> (2023–25) — Senior Strategy Consultant; M&A and growth strategy in MENAP\n• <b>China Mobile</b> (2022–23) — Growth Manager; P&L owner of a USD 50M portfolio\n• <b>TWI</b> (2021–22, UK/Pakistan) — Innovation Project Lead; Horizon Europe projects, USD 36M budgets\n• <b>Government of Pakistan</b> (2019–21) — skills development programs training 10,000+ people\n\nAsk me about any of these for details!",
+    followups:['Tell me about Afiniti','Tell me about China Mobile','What are his biggest achievements?']
+  },
+  {
+    id:'afiniti',
+    keywords:{afiniti:5,amex:4,american:2,express:3,siriusxm:5,sirius:4,xm:3,analyst:2,churn:3,'contact':2,center:2},
+    phrases:[{text:'american express',boost:4},{text:'senior data analyst',boost:3}],
+    answer:"At <b>Afiniti</b> (Senior Data Analyst, Oct 2024 – Mar 2025), Shehryar worked on enterprise AI in production:\n\n• Led AI performance optimization, analysis, and reporting for <b>American Express and SiriusXM</b>\n• Identified a data inconsistency in the AI model and led a normalization effort that made the model more effective — driving a <b>7% contact-center revenue gain</b> through reduced customer churn\n• Built executive-level <b>Power BI dashboards</b> connected live to SQL databases\n\n<b>About Afiniti:</b> a multinational AI company (founded 2006, Washington D.C.) specializing in <b>AI-driven customer–agent pairing</b> for contact centers — ~1,200 employees, operations in 18+ countries, and Fortune 500 clients across telecom, financial services, healthcare, and insurance.",
+    followups:['How does he handle setbacks?','What are his technical skills?','How can I contact him?']
+  },
+  {
+    id:'laluz',
+    keywords:{laluz:5,controls:2,reporting:2,inventory:2,purchasing:2,supply:2,chain:2,automate:2},
+    answer:"At <b>Laluz GmbH</b> in Vienna (Reporting & Controls Specialist, Sep 2025 – Jan 2026, part-time alongside his Master's), Shehryar:\n\n• Built monitoring controls with <b>Power Automate</b> integration for automatic PO notifications\n• Digitalized financial records, purchasing, and inventory management\n• Recategorized supply chain operations across <b>5 locations</b>, lifting efficiency by <b>6% in the first month</b>\n\n<b>About Laluz:</b> a Vienna-based gastronomy & hospitality group headquartered in the 1st district (Innere Stadt), with <b>5 locations</b> across Vienna and ~70 staff.",
+    followups:['What is he doing now?','Walk me through his career','What are his technical skills?']
+  },
+  {
+    id:'creare',
+    keywords:{creare:5,consulting:4,consultant:4,strategy:2,'m&a':4,merger:3,dubai:3,ksa:3,saudi:3,mena:2,menap:3,pilot:2},
+    answer:"At <b>Creare Business Consulting</b> (Senior Strategy Consultant, Sep 2023 – Mar 2025), Shehryar:\n\n• Led <b>3 client projects</b> and trained 10 internal team members across the MENAP region, including an <b>M&A strategy</b> to launch operations in Dubai\n• Applied statistical modelling (regressions) to growth and strategy work\n• <b>Won a marketing-strategy contract for a telecom in Saudi Arabia</b> through a successful pilot — beating Tier 1–2 consulting firms\n\n<b>About Creare:</b> a boutique strategy consultancy based in Lahore (~15 consultants) serving clients across Pakistan and MENAP — now building a permanent presence in MENA.",
+    followups:['Tell me about China Mobile','What are his biggest achievements?','Which industries has he worked in?']
+  },
+  {
+    id:'chinamobile',
+    keywords:{china:4,mobile:3,zong:5,cmpak:5,'p&l':4,pnl:4,pricing:5,repricing:5,arpu:4,gsm:3,mbb:3,portfolio:2,growth:2,budget:1},
+    phrases:[{text:'china mobile',boost:5}],
+    answer:"At <b>China Mobile</b> (Assistant Manager Growth, Apr 2022 – Jul 2023), Shehryar held real commercial ownership:\n\n• <b>P&L responsibility for a USD 50M portfolio</b> (Manufacturing & Education verticals)\n• Restructured verticals to hit a <b>15% growth rate</b> — new markets, new products, and 20% faster turnaround\n• Drove strategic partnerships saving ~<b>USD 100,000</b>\n• Repriced GSM & MBB products against inflation, lifting <b>ARPU by 10%</b> and delivering <b>17% YoY growth</b>\n\n<b>About China Mobile / Zong:</b> CMPak (brand: Zong) is the wholly-owned Pakistani subsidiary of <b>China Mobile — the world's largest mobile operator</b> (~1B subscribers, ~450,000 employees). Zong itself: ~54M subscribers, ~26% market share, 15,000+ 4G sites.",
+    followups:['Does he have pricing experience?','What are his biggest achievements?','Walk me through his career']
+  },
+  {
+    id:'twi',
+    keywords:{twi:5,welding:4,innovation:3,horizon:4,europe:1,innovate:3,uk:2,cambridge:3,digital:2,twin:3,iiot:4,iot:3,funding:2,grants:3,manufacturing:2},
+    phrases:[{text:'horizon europe',boost:4}],
+    answer:"At <b>TWI</b> (Innovation Project Lead, Oct 2021 – Apr 2022, Pakistan/Cambridge UK), Shehryar:\n\n• Provided commercial-viability expertise on <b>5 Horizon Europe and Innovate UK projects</b> as Technical Project Manager\n• Supervised teams from <b>13+ countries</b> and managed budgets of <b>USD 36M</b> on manufacturing applications (Digital Twin, IIoT)\n• Created commercial strategies that won <b>~USD 9M in public funding</b>\n\n<b>About TWI:</b> a UK engineering research & technology organization near Cambridge (founded 1946) — ~800 employees and <b>1,800+ industrial member companies in 70+ countries</b> — specializing in materials joining, structural integrity, and advanced manufacturing R&D.",
+    followups:['Has he led teams?','Walk me through his career','What are his biggest achievements?']
+  },
+  {
+    id:'government',
+    keywords:{government:4,psdf:5,punjab:3,pakistan:2,public:2,sector:1,ngo:2,social:2,impact:1,skills:1,development:2,marginalized:3,training:2,programs:2},
+    phrases:[{text:'government of pakistan',boost:5},{text:'public sector',boost:3}],
+    answer:"At the <b>Government of Pakistan</b> (Management Associate, New Businesses & International Partnerships, Sep 2019 – Sep 2021), Shehryar:\n\n• Aligned industry with government objectives to execute skills-development projects in Pakistan and MENA\n• Led 2 programs in South Asia and 1 in MENA, <b>training 10,000+ people</b> while saving 12% in OPEX\n• Introduced digital skills programs for <b>marginalized communities</b> — rural women, transgender people, and differently-abled persons\n\n<b>About PSDF:</b> Shehryar worked with the <b>Punjab Skills Development Fund</b> — a public-private partnership focused on upskilling marginalized communities in Pakistan and MENA.",
+    followups:['What volunteer work has he done?','Walk me through his career','How can I contact him?']
+  },
+  {
+    id:'internships',
+    keywords:{internship:4,internships:4,intern:3,ey:4,ernst:4,young:2,nestle:4,'nestlé':4,honda:3,early:2},
+    answer:"Early in his career, Shehryar interned at:\n\n• <b>Ernst & Young (EY)</b> — Advisory Services, Lahore (2018): identified operational inefficiencies and mapped process flows in MS Visio for the client Honda. <i>EY is a Big Four professional services firm — ~406,000 people, 150+ countries, US$53.2B revenue (FY2025).</i>\n\n• <b>Nestlé Pakistan</b> — Marketing, dairy domain (2017): primary research on retail locations, consumer buying trends, and merchandising. <i>Nestlé Pakistan (HQ Lahore) is the country's largest food & beverage company, with 4 factories including Kabirwala — the largest milk-intake plant in the Nestlé world. Parent Nestlé S.A. is the world's largest food company (~271,000 employees, 187 countries, 2,000+ brands).</i>",
+    followups:['Walk me through his career','Where did he study?','What are his technical skills?']
+  },
+  {
+    id:'skills',
+    keywords:{skills:3,skill:3,technical:3,tools:3,stack:3,python:4,sql:4,'r':2,powerbi:4,power:2,bi:3,dax:4,excel:4,vba:4,tableau:2,sap:3,html:2,programming:3,code:2,coding:3,technologies:3,software:2,proficient:2},
+    phrases:[{text:'power bi',boost:4},{text:'tech stack',boost:4}],
+    answer:"Shehryar's technical toolkit:\n\n• <b>Data & analytics:</b> Python, SQL, R, Power BI (DAX, M), MS Excel (VBA, Macros), Power Automate, HTML\n• <b>ERP & workflow:</b> SAP (ongoing), Kanban, Notion, Confluence, MS Visio\n• <b>Methods:</b> statistical modelling (regressions), AI model performance analysis, executive dashboarding, financial modelling\n\nCertified: ESG Reporting (2026), Data Analyst in SQL (DataCamp, 2025), Data Analyst in Power BI (DataCamp, 2024), Quantitative Modeling (Wharton, 2023).",
+    followups:['What certifications does he have?','Which languages does he speak?','What are his biggest achievements?']
+  },
+  {
+    id:'education',
+    keywords:{education:4,study:3,studied:3,university:3,degree:4,masters:4,master:3,bachelor:4,bachelors:4,ceu:5,lahore:2,school:2,economics:2,gpa:3,cgpa:3,academic:2,graduate:2,graduating:2,graduation:2},
+    phrases:[{text:'central european',boost:4}],
+    answer:"Shehryar's education:\n\n• <b>Central European University, Vienna</b> — Master's in Economics, Data & Policy (2025–2027), <b>Data Science specialization</b>, on academic scholarship\n• <b>Lahore School of Economics</b> — Bachelor's in Economics & Political Science <b>with honors</b> (2015–2019), CGPA 3.65/4.0 (equivalent to 1.3 in Austria); Teaching Assistant for Statistics and Advanced Calculus",
+    followups:['What certifications does he have?','What is he doing now?','Which languages does he speak?']
+  },
+  {
+    id:'certifications',
+    keywords:{certifications:5,certification:5,certificates:4,certificate:4,certified:4,datacamp:4,wharton:4,courses:3,course:2,upskilling:3},
+    answer:"Shehryar's latest certifications:\n\n• <b>2026:</b> ESG Reporting\n• <b>2025:</b> Data Analyst in SQL — DataCamp\n• <b>2024:</b> Data Analyst in Power BI — DataCamp\n• <b>2023:</b> Quantitative Modeling — University of Pennsylvania (Wharton)\n• <b>2022:</b> Commercial & Business Strategies — China Mobile",
+    followups:['What are his technical skills?','Where did he study?','How can I contact him?']
+  },
+  {
+    id:'languages',
+    keywords:{languages:4,language:4,speak:3,speaks:3,german:4,english:3,urdu:4,hindi:4,punjabi:4,spanish:4,multilingual:4,fluent:3},
+    answer:"Shehryar speaks <b>6 languages</b>:\n\n• English — C2 (full professional)\n• Urdu & Punjabi — native\n• Hindi — B2\n• German — B1 (and improving, based in Vienna)\n• Spanish — A2",
+    followups:['Where is he based?','What are his technical skills?','How can I contact him?']
+  },
+  {
+    id:'location',
+    keywords:{located:3,location:3,based:3,live:2,lives:3,city:2,vienna:4,austria:4,relocate:4,relocation:4,remote:3,hybrid:3,onsite:2,timezone:3,'zone':1,move:2,willing:1},
+    phrases:[{text:'open to relocation',boost:6},{text:'willing to relocate',boost:6}],
+    answer:"Shehryar is based in <b>Vienna, Austria</b> 🇦🇹 — he's worked across Europe, the Middle East, and South Asia, including remote roles with US-based clients (AMEX, SiriusXM).\n\nFor specifics on remote/hybrid preferences or relocation, it's best to ask him directly — he responds quickly:" + '%CONTACT%',
+    followups:['Is he open to new opportunities?','Give me a quick overview','Which languages does he speak?']
+  },
+  {
+    id:'availability',
+    keywords:{available:4,availability:4,open:3,opportunities:3,opportunity:2,hire:3,hiring:3,looking:3,seeking:3,notice:4,start:2,join:2,interested:2,offer:2,'when':1,freelance:3,contract:2},
+    phrases:[{text:'open to',boost:3},{text:'notice period',boost:4},{text:'new role',boost:3}],
+    answer:"Shehryar is currently on a contract with the <b>World Bank Group</b> in Vienna and completing his Master's at CEU (graduating <b>May 2027</b>).\n\nHe's always open to hearing about interesting opportunities — especially at the intersection of <b>data, strategy, and policy</b>. He's open to <b>full-time, part-time, and remote</b> formats. The best move is to reach out directly with a few details about the role:" + '%CONTACT%',
+    followups:['What is he looking for next?','Give me a quick overview','What are his biggest achievements?']
+  },
+  {
+    id:'achievements',
+    keywords:{achievements:4,achievement:4,accomplishments:4,accomplishment:4,proud:3,impact:3,results:3,numbers:3,metrics:3,highlights:3,best:2,biggest:2,greatest:2,standout:3,wins:3},
+    answer:"Some numbers that tell Shehryar's story:\n\n• <b>+7% contact-center revenue</b> for AMEX/SiriusXM by fixing an AI model's data inconsistency (Afiniti)\n• <b>USD 50M P&L ownership</b> with 15% growth and +10% ARPU through repricing (China Mobile)\n• <b>~USD 9M in public funding won</b> across Horizon Europe / Innovate UK projects (TWI)\n• <b>10,000+ people trained</b> across South Asia & MENA with 12% OPEX savings (Govt of Pakistan)\n• Beat <b>Tier 1–2 consulting firms</b> to win a KSA telecom contract (Creare)\n• Also: 1st place in a Google Startup Challenge and a Management Excellence award from Americana Group (UAE)",
+    followups:['Walk me through his career','What are his technical skills?','How can I contact him?']
+  },
+  {
+    id:'industries',
+    keywords:{industries:4,industry:3,sectors:4,sector:2,domains:3,domain:2,verticals:3,healthcare:3,retail:3,fintech:2,banking:2,telecoms:3,telecommunications:3},
+    answer:"Shehryar has worked across a broad set of industries:\n\n• <b>Telecom</b> — China Mobile, KSA telecom strategy\n• <b>Media & entertainment</b> — SiriusXM\n• <b>Financial services</b> — American Express\n• <b>Development & policy</b> — World Bank, Government of Pakistan\n• <b>Manufacturing & deep tech</b> — TWI (Digital Twin, IIoT)\n• <b>Retail & FMCG</b> — Nestlé, Laluz\n• Plus education and healthcare through consulting and growth roles",
+    followups:['Walk me through his career','What are his biggest achievements?','Is he open to new opportunities?']
+  },
+  {
+    id:'leadership',
+    keywords:{leadership:4,lead:2,led:2,leading:3,manage:3,managed:3,management:3,manager:3,style:2,team:3,teams:3,mentor:3,mentored:3,trained:2,supervise:3,supervised:3,people:2,stakeholders:3,reports:2},
+    phrases:[{text:'management style',boost:5},{text:'managed teams',boost:4},{text:'managed people',boost:4}],
+    answer:"Yes — he has. At <b>TWI</b> he supervised project teams from <b>13+ countries</b> on USD 36M budgets; at <b>Creare</b> he trained and led <b>10 consultants</b> across MENAP.\n\nHis style: set clear ownership, give people room, and <b>inspect the output, not the hours</b>. He's led both technical analysts and non-technical stakeholders — and owned P&L for USD 50M in verticals at China Mobile.",
+    followups:['How does he handle conflict?','What are his strengths?','What are his biggest achievements?']
+  },
+  {
+    id:'pressure',
+    keywords:{pressure:5,stress:4,stressful:4,stressed:4,calm:3,cope:3,coping:3,crisis:4,urgent:3,urgency:3,handle:1},
+    phrases:[{text:'under pressure',boost:4},{text:'high pressure',boost:4}],
+    answer:"Shehryar treats pressure as a <b>prioritization problem, not a panic problem</b>. His approach: break the complex issue into smaller, digestible parts, lean on data to triage, and communicate early to get ahead of the problem.\n\nHe's been tested: at Afiniti he ran performance reporting for <b>live AI systems serving AMEX and SiriusXM</b>, where issues surfaced in real time and answers were expected the same day. At China Mobile he carried <b>USD 50M P&L through an inflation crisis</b> — responding with a repricing that lifted ARPU 10% instead of letting margins erode.",
+    followups:['How does he manage deadlines?','How does he handle setbacks?','What are his strengths?']
+  },
+  {
+    id:'timelines',
+    keywords:{deadline:5,deadlines:5,timeline:4,timelines:5,prioritize:4,prioritizes:4,prioritization:4,priorities:4,priority:3,juggle:4,juggling:4,multitask:4,multitasking:4,organize:3,organized:3,planning:3,plan:2,roadmap:3,workload:4},
+    phrases:[{text:'time management',boost:5},{text:'competing priorities',boost:5},{text:'tight deadline',boost:5}],
+    answer:"He sets the deadline, <b>plans backwards</b> from it, and keeps a clear, visible roadmap — he's a daily user of <b>Kanban and Notion</b>.\n\nThe proof: through 2025–26 he delivered a part-time controls role at Laluz, a full Master's course load at CEU, and consulting work <b>simultaneously</b>, without missing deliverables.\n\nHis rule: <b>flag risks to stakeholders when they're small — never at the deadline</b>.",
+    followups:['How does he handle pressure?','Has he managed teams?','Give me a quick overview']
+  },
+  {
+    id:'setbacks',
+    keywords:{setback:5,setbacks:5,failure:5,failures:5,failed:4,fail:4,mistake:4,mistakes:4,adversity:4,obstacle:4,obstacles:4,recover:3,recovered:3,bounce:3,struggled:4,struggle:3,wrong:2},
+    phrases:[{text:'went wrong',boost:4},{text:'biggest failure',boost:5}],
+    answer:"A real example: at Afiniti, he discovered the AI model he was responsible for was <b>underperforming due to a data inconsistency</b> that had gone unnoticed. Rather than reporting around it, he owned the cleanup and led a normalization effort — which ended up driving a measurable revenue gain.\n\nHis favorite saying: <b>setbacks handled transparently become credibility</b>.",
+    followups:['How does he handle conflict?','What are his strengths?','How can I contact him?']
+  },
+  {
+    id:'conflict',
+    keywords:{conflict:5,conflicts:5,disagree:5,disagreement:5,disagreements:5,disagrees:5,criticism:4,critique:3,feedback:3,pushback:5,argue:4,argument:4,confrontation:4},
+    phrases:[{text:'difficult conversations',boost:5},{text:'disagree with',boost:4}],
+    answer:"Curiosity first — he assumes the other person <b>sees something he doesn't</b>. He anchors disagreements in <b>data rather than opinion</b>, and he's comfortable disagreeing upward: at Creare he won a telecom & entertainment contract by challenging assumptions through a pilot rather than an argument.\n\nAnd if he's wrong, he says so quickly.",
+    followups:['How does he handle pressure?','Has he managed teams?','How can I contact him?']
+  },
+  {
+    id:'strengths',
+    keywords:{strengths:5,strength:5,strongest:4,superpower:4,superpowers:4},
+    phrases:[{text:'best at',boost:4},{text:'good at',boost:4},{text:'greatest strength',boost:5}],
+    answer:"Three stand out:\n\n• <b>Turning messy data into commercial decisions</b> — the revenue fix at Afiniti started as a data-quality hunch\n• <b>Commercial ownership</b> — he's held real P&L (USD 50M) and delivered growth, not just analysis\n• <b>Cross-cultural stakeholder leadership</b> — teams from 13+ countries, six languages, and public/private stakeholder work at the World Bank",
+    followups:['What are his weaknesses?','What are his biggest achievements?','How can I contact him?']
+  },
+  {
+    id:'weaknesses',
+    keywords:{weakness:5,weaknesses:5,flaw:4,flaws:4,shortcoming:4,shortcomings:4,improve:3,improvement:2,blindspot:4,blindspots:4,develop:2},
+    phrases:[{text:'areas of improvement',boost:5},{text:'growth areas',boost:4},{text:'biggest weakness',boost:5}],
+    answer:"He'll be honest: he tends to <b>say yes to too much</b> — the fix has been ruthless weekly prioritization and negotiating scope upfront.\n\nAnd early in his career he was <b>impatient with slow-moving processes</b>; working in large MNCs and now the World Bank taught him that bringing stakeholders along <i>is</i> the work, not an obstacle to it.",
+    followups:['What are his strengths?','How does he handle setbacks?','How can I contact him?']
+  },
+  {
+    id:'transitions',
+    keywords:{why:2,left:3,leave:3,leaving:3,quit:4,transition:4,transitions:4,gap:4,gaps:4,switch:3,switched:3,moved:2,join:2,joined:2,departure:4},
+    phrases:[{text:'why did he leave',boost:5},{text:'why he left',boost:5},{text:'move to vienna',boost:5},{text:'job change',boost:4}],
+    answer:"Each move followed a deliberate thread — <b>digital transformation with more scale, more ownership, and closer to real-world impact</b>.\n\nHe left Afiniti in March 2025 because he'd won an <b>academic scholarship to CEU in Vienna</b>; the part-time roles since (Laluz, consulting) were about staying commercially sharp during the Master's. The <b>World Bank Pioneer program</b> is the convergence point: economics, data, and policy in one role.",
+    followups:['What is he looking for next?','What is he doing now?','Walk me through his career']
+  },
+  {
+    id:'motivation',
+    keywords:{motivates:5,motivation:5,motivated:4,drives:4,driven:4,drive:3,passion:4,passionate:4,inspire:3,inspires:3,excites:4},
+    phrases:[{text:'what drives',boost:5}],
+    answer:"He's spent six years watching good data projects die in bad decisions. What drives him is the <b>translation layer</b> — making analytics actually move a P&L, a policy, or a program.\n\nThat's why his career runs through both AMEX dashboards and skills programs for 10,000+ people in Pakistan: <b>same skill, different stakes</b>.",
+    followups:['What is he looking for next?','What is his proudest project?','Give me a quick overview']
+  },
+  {
+    id:'colleagues',
+    keywords:{colleagues:5,colleague:5,coworkers:5,coworker:5,teammates:4,describe:4,described:4,personality:4,reputation:4},
+    phrases:[{text:'work with him',boost:5},{text:'to work with',boost:4},{text:'describe him',boost:5}],
+    answer:"<b>Always smiling, calm under fire</b>, and good at moving between the server room and the boardroom.\n\nThe recurring feedback: <b>he makes complex things simple without making them simplistic</b>.",
+    followups:['What are his strengths?','How does he handle conflict?','How can I contact him?']
+  },
+  {
+    id:'proudest',
+    keywords:{proud:5,proudest:5,meaningful:4,fulfilling:4,favorite:2,favourite:2,memorable:4},
+    phrases:[{text:'most proud',boost:5},{text:'favorite project',boost:5},{text:'favourite project',boost:5}],
+    answer:"The <b>Government of Pakistan digital skills programs</b> — 10,000+ people trained, including programs built specifically for rural women, transgender people, and differently-abled persons.\n\nThe Afiniti and World Bank roles paid better; <b>this one mattered more</b>.",
+    followups:['What are his biggest achievements?','What drives him?','How can I contact him?']
+  },
+  {
+    id:'seeking',
+    keywords:{looking:4,seeking:4,seeks:4,ideal:4,dream:4,next:3,target:2,fit:2,aspirations:4,goals:3,goal:3},
+    phrases:[{text:'looking for',boost:4},{text:'next role',boost:5},{text:'ideal role',boost:5},{text:'career goals',boost:5}],
+    answer:"Roles at the intersection of <b>data and strategy</b> — including analytics leadership, strategy, pricing, or data science roles in international organizations, consultancies, or tech.\n\nHe's based in Vienna and open to <b>full-time, part-time, and remote</b> formats. He's currently at the World Bank with his Master's completing May 2027, so timing and format are worth a direct conversation:" + '%CONTACT%',
+    followups:['Is he open to new opportunities?','Where is he based?','How can I contact him?']
+  },
+  {
+    id:'whyhire',
+    keywords:{unique:3,different:3,special:3,differentiator:5,usp:5},
+    phrases:[{text:'why hire',boost:6},{text:'should we hire',boost:6},{text:'should i hire',boost:6},{text:'what makes him',boost:4},{text:'value add',boost:4}],
+    answer:"In one line: <b>he turns data into impact</b>.\n\n6+ years of proof — <b>+7% revenue</b> for AMEX/SiriusXM at Afiniti, <b>USD 50M P&L with 15% growth</b> at China Mobile, <b>~USD 9M in funding won</b> at TWI — and he speaks both boardroom and server room.",
+    followups:['What are his biggest achievements?','What are his strengths?','How can I contact him?']
+  },
+  {
+    id:'ai',
+    keywords:{ai:4,ml:4,machine:3,learning:2,artificial:4,intelligence:3,models:2,model:2,genai:4,llm:4},
+    phrases:[{text:'machine learning',boost:5},{text:'data science',boost:4}],
+    answer:"Hands-on with <b>production AI</b>: he optimized live AI models at Afiniti — a data normalization effort that drove <b>+7% revenue</b> — applied statistical modelling (regressions) in consulting, and is completing a <b>Data Science specialization</b> in his Master's at CEU.",
+    followups:['Tell me about Afiniti','What are his technical skills?','What is his take on AI?']
+  },
+  {
+    id:'executives',
+    keywords:{executives:5,executive:4,csuite:5,boardroom:4,board:3,presenting:4,presented:4,presentation:4,presentations:4,present:2,communicate:3,communication:3,storytelling:4},
+    phrases:[{text:'c suite',boost:5},{text:'senior leadership',boost:4},{text:'communication skills',boost:4}],
+    answer:"Routinely. <b>Executive-level Power BI dashboards</b> at Afiniti, C-suite growth reporting at China Mobile, and <b>public/private stakeholder mobilization</b> at the World Bank.",
+    followups:['Has he managed teams?','What are his biggest achievements?','How can I contact him?']
+  },
+  {
+    id:'remotework',
+    keywords:{distributed:5,remotely:4,remote:2,async:4,offshore:3},
+    phrases:[{text:'remote team',boost:5},{text:'remote teams',boost:5},{text:'worked remote',boost:5},{text:'distributed teams',boost:5}],
+    answer:"Yes — <b>fully remote at Afiniti</b> serving US clients across time zones, and supervised teams from <b>13+ countries</b> at TWI.",
+    followups:['Where is he based?','Is he open to new opportunities?','How can I contact him?']
+  },
+  {
+    id:'references',
+    keywords:{references:5,reference:5,referees:5,referee:5,vouch:4,testimonials:4,testimonial:4,recommendations:4,recommendation:4,endorsements:4},
+    phrases:[{text:'letter of recommendation',boost:5}],
+    answer:"Yes — professional references from managers and clients are <b>available on request</b>; email him and he'll share them promptly. You can also find recommendations on his <b>LinkedIn profile</b>:" + '%CONTACT%',
+    followups:['How can I contact him?','What are his strengths?','How would colleagues describe him?']
+  },
+  {
+    id:'travel',
+    keywords:{travel:5,travelling:5,traveling:5,trips:3,mobility:4},
+    answer:"Yes — he's worked across <b>four countries</b> and travels readily for the right role; specifics are best discussed directly:" + '%CONTACT%',
+    followups:['Where is he based?','Is he open to relocation?','How can I contact him?']
+  },
+  {
+    id:'interview',
+    keywords:{interview:5,interviews:5,interviewing:5,screening:4,screen:2},
+    answer:"Usually <b>within a few days</b> — evenings CET work best given his World Bank schedule. Email him a slot:" + '%CONTACT%',
+    followups:['How can I contact him?','What is he looking for next?','Give me a quick overview']
+  },
+  {
+    id:'howbuilt',
+    keywords:{built:3,bot:4,chatbot:5,website:3,site:2,page:2,made:3,coded:4},
+    phrases:[{text:'who made you',boost:5},{text:'who built you',boost:5},{text:'built you',boost:5},{text:'how do you work',boost:5},{text:'build this',boost:4},{text:'this chatbot',boost:4},{text:'this bot',boost:4}],
+    answer:"Shehryar built me himself — a <b>zero-dependency, single-file chatbot</b> (HTML/JS with a custom intent-matching engine). No frameworks, no API costs. The same <b>practical-over-fancy</b> approach he brings to data work.",
+    followups:['What are his technical skills?','Give me a quick overview','How can I contact him?']
+  },
+  {
+    id:'pioneer',
+    keywords:{pioneer:5,program:2,cohort:4,selective:3},
+    phrases:[{text:'pioneer program',boost:6}],
+    answer:"A flagship, <b>highly selective World Bank early-career program</b>. Shehryar's cohort role covers economic policy and data analytics for <b>water development projects in Eastern & Central Europe</b>.",
+    followups:['What is he doing now?','Walk me through his career','How can I contact him?']
+  },
+  {
+    id:'environment',
+    keywords:{environment:4,culture:5,thrive:4,thrives:4,fit:2,workplace:4,atmosphere:3,vibe:3},
+    phrases:[{text:'team environment',boost:5},{text:'culture fit',boost:6},{text:'work environment',boost:5}],
+    answer:"Teams with <b>clear ownership and room to run</b> — he thrives where data people and decision-makers sit close together, and he's most at home in <b>international, cross-cultural settings</b>.",
+    followups:['Has he managed teams?','How would colleagues describe him?','What is he looking for next?']
+  },
+  {
+    id:'learning',
+    keywords:{learning:3,learn:3,learns:3,curious:3,curiosity:3,upskill:5,upskilling:4},
+    phrases:[{text:'stay current',boost:6},{text:'keep up',boost:4},{text:'stay updated',boost:5},{text:'up to date',boost:5},{text:'professional development',boost:5}],
+    answer:"A certification a year — <b>ESG Reporting '26, SQL '25, Power BI '24, Wharton '23</b> — a Data Science Master's in progress, and SAP training ongoing: deliberate, continuous upskilling.",
+    followups:['What certifications does he have?','What are his technical skills?','Where did he study?']
+  },
+  {
+    id:'aitake',
+    keywords:{opinion:4,think:3,thinks:3,view:4,views:4,take:3,perspective:4,thoughts:4,believe:3,believes:3},
+    phrases:[{text:'think about ai',boost:6},{text:'take on ai',boost:6},{text:'view on ai',boost:6},{text:'views on ai',boost:6},{text:'thoughts on ai',boost:6},{text:'opinion on ai',boost:6}],
+    answer:"His view: <b>AI is only as good as its data — and its adoption by real people</b>. He's seen a single data inconsistency quietly drag down a production model, so he believes the edge lies in data quality and getting decision-makers to actually use the output.",
+    followups:['Does he have AI experience?','What are his technical skills?','How can I contact him?']
+  },
+  {
+    id:'mentoring',
+    keywords:{mentoring:5,mentorship:5,mentor:4,mentors:4,coffee:4,mentee:4,speaking:3,speaker:4,event:3,events:3,workshop:4,webinar:4,panel:4,advice:4,guidance:3,conference:4},
+    phrases:[{text:'coffee chat',boost:6},{text:'speak at',boost:5},{text:'open to mentoring',boost:6}],
+    answer:"Happy to — reach out via email or LinkedIn and he'll align on a time:" + '%CONTACT%',
+    followups:['How can I contact him?','What drives him?','Give me a quick overview']
+  },
+  {
+    id:'portfolio',
+    keywords:{portfolio:5,projects:2,side:3,github:4,publications:4,publication:4,blog:3,articles:3,samples:4,showcase:4},
+    phrases:[{text:'side projects',boost:6},{text:'work samples',boost:5}],
+    answer:"This chatbot is the current public one — more can be shared on request:" + '%CONTACT%',
+    followups:['How was this chatbot built?','What are his biggest achievements?','How can I contact him?']
+  },
+  {
+    id:'salary',
+    keywords:{salary:5,compensation:5,pay:3,rate:2,expectations:2,budget:1,remuneration:5,money:2,paid:2},
+    phrases:[{text:'salary expectations',boost:5}],
+    answer:"Compensation is something Shehryar prefers to discuss directly — it depends on the role, scope, and location. Drop him a note with the role details and he'll get back to you quickly:" + '%CONTACT%',
+    followups:['Is he open to new opportunities?','Give me a quick overview','What are his biggest achievements?']
+  },
+  {
+    id:'visa',
+    keywords:{visa:5,sponsorship:5,permit:4,authorization:4,authorized:4,citizenship:4,eligible:2,eligibility:3,'eu':2},
+    phrases:[{text:'work permit',boost:5},{text:'right to work',boost:5}],
+    answer:"Work authorization is manageable on Shehryar's side. For the specifics of your situation, reach out to him directly — he responds quickly:" + '%CONTACT%',
+    followups:['Where is he based?','Is he open to new opportunities?','Give me a quick overview']
+  },
+  {
+    id:'contact',
+    keywords:{contact:5,reach:4,email:4,mail:3,touch:3,connect:3,message:3,call:2,talk:3,phone:3,linkedin:3,interview:3,meeting:3,schedule:3,chat:2},
+    phrases:[{text:'get in touch',boost:5},{text:'reach out',boost:4}],
+    answer:"Great — Shehryar would love to hear from you! The fastest ways to reach him:" + '%CONTACT%' + "\nMention that his AI assistant referred you. 😊",
+    followups:['Is he open to new opportunities?','Give me a quick overview','What are his biggest achievements?']
+  },
+  {
+    id:'interests',
+    keywords:{interests:4,hobbies:4,hobby:4,fun:3,volunteer:4,volunteering:4,personal:2,music:3,sports:3,football:3,tennis:3,trekking:4,outside:2,'life':1},
+    answer:"Beyond work, Shehryar is into <b>trekking, indie rock & instrumental music, football, tennis, and board games</b> — and he's a former swimming gold medalist. 🏊\n\nHe also volunteers regularly: cancer hospital support, SOS Children's Orphanage, children's education, and WWF Pakistan.",
+    followups:['Give me a quick overview','Which languages does he speak?','How can I contact him?']
+  },
+  {
+    id:'thanks',
+    keywords:{thanks:4,thank:4,thx:4,appreciate:3,helpful:3,great:2,awesome:2,perfect:2,cool:2,nice:2,bye:3,goodbye:4},
+    answer:"You're very welcome! If anything caught your eye, Shehryar is one email away — he'd be glad to continue the conversation personally." + '%CONTACT%',
+    followups:['How can I contact him?','Give me a quick overview']
+  }
+];
+
+var FALLBACK = {
+  answer:"That's a great question — and exactly the kind of thing Shehryar would love to answer personally. I can only cover what's in his professional profile, so let me refer you to him directly:" + '%CONTACT%' + "\nOr try asking me about his experience, skills, achievements, education, or availability.",
+  followups:['Give me a quick overview','Walk me through his career','What are his biggest achievements?']
+};
+
+function normalize(text){
+  return text.toLowerCase().replace(/[^a-z0-9&\s]/g,' ').replace(/\s+/g,' ').trim();
+}
+
+function matchIntent(question){
+  var q = normalize(question);
+  if(!q) return null;
+  var tokens = q.split(' ');
+  var tokenSet = {};
+  tokens.forEach(function(t){
+    tokenSet[t] = true;
+    if(t.length > 3 && t.slice(-1) === 's') tokenSet[t.slice(0,-1)] = true; // naive singular
+  });
+  var best = null, bestScore = 0;
+  INTENTS.forEach(function(intent){
+    var score = 0;
+    for(var kw in intent.keywords){
+      if(tokenSet[kw]) score += intent.keywords[kw];
+    }
+    (intent.phrases||[]).forEach(function(p){
+      if(q.indexOf(p.text) !== -1) score += p.boost;
+    });
+    if(score > bestScore){ bestScore = score; best = intent; }
+  });
+  return bestScore >= 3 ? best : null;
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { matchIntent: matchIntent, INTENTS: INTENTS, FALLBACK: FALLBACK };
+}
+// === BOT LOGIC END ===
+
+/* ---------- UI ---------- */
+(function(){
+  if (typeof document === 'undefined') return;
+  var msgs = document.getElementById('msgs');
+  var chipsEl = document.getElementById('chips');
+  var input = document.getElementById('input');
+  var sendBtn = document.getElementById('send');
+
+  function bubble(role, html){
+    var m = document.createElement('div');
+    m.className = 'msg ' + role;
+    var initials = role === 'bot' ? 'AI' : 'You';
+    m.innerHTML = '<div class="m-avatar">' + initials + '</div><div class="bubble">' + html + '</div>';
+    msgs.appendChild(m);
+    msgs.scrollTop = msgs.scrollHeight;
+    return m;
+  }
+
+  function typing(){
+    var m = document.createElement('div');
+    m.className = 'msg bot typing';
+    m.innerHTML = '<div class="m-avatar">AI</div><div class="bubble"><span class="d"></span><span class="d"></span><span class="d"></span></div>';
+    msgs.appendChild(m);
+    msgs.scrollTop = msgs.scrollHeight;
+    return m;
+  }
+
+  function renderAnswer(text){
+    return text.split('%CONTACT%').join(CONTACT_HTML);
+  }
+
+  function setChips(list){
+    chipsEl.innerHTML = '';
+    (list||[]).forEach(function(label){
+      var c = document.createElement('button');
+      c.className = 'chip';
+      c.textContent = label;
+      c.onclick = function(){ ask(label); };
+      chipsEl.appendChild(c);
+    });
+  }
+
+  function escapeHtml(s){
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function ask(question){
+    question = (question||'').trim();
+    if(!question) return;
+    bubble('user', escapeHtml(question));
+    input.value = '';
+    setChips([]);
+    var t = typing();
+    var delay = 500 + Math.random()*500;
+    setTimeout(function(){
+      t.remove();
+      var intent = matchIntent(question) || FALLBACK;
+      bubble('bot', renderAnswer(intent.answer));
+      setChips(intent.followups);
+    }, delay);
+  }
+
+  sendBtn.onclick = function(){ ask(input.value); };
+  input.addEventListener('keydown', function(e){
+    if(e.key === 'Enter') ask(input.value);
+  });
+
+  // Welcome
+  setTimeout(function(){
+    bubble('bot', "Hi there! 👋 I'm <b>Shehryar's AI assistant</b>. I can answer your questions about his experience, skills, and background — and point you to him directly if you'd like to talk.\n\nWhat would you like to know?");
+    setChips(['Give me a quick overview','Why should we hire him?','How does he handle pressure?','What is he looking for next?']);
+  }, 400);
+})();
+</script>
+</body>
+</html>
